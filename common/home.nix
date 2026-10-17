@@ -15,6 +15,7 @@ in
   home.enableNixpkgsReleaseCheck = false;
 
   home.packages = with pkgs; [
+    bitwarden-cli
     bitwarden-desktop
     tree
   ];
