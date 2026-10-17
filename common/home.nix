@@ -14,10 +14,13 @@ in
   home.stateVersion = "26.05";
   home.enableNixpkgsReleaseCheck = false;
 
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = with pkgs; [
     bitwarden-cli
     bitwarden-desktop
     tree
+    vscode
   ];
 
   home.sessionVariables = {

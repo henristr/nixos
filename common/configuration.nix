@@ -24,8 +24,12 @@ in
 
   services.xserver.enable = true;
 
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "breeze";
+  };
 
-  services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
   
   services.xserver.xkb = {
@@ -60,6 +64,8 @@ in
 
   programs.firefox.enable = true;
 
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     fastfetch
     unstable.fetch
@@ -71,6 +77,13 @@ in
   services.openssh.enable = true;
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
+
 
   system.stateVersion = "26.05";
 
