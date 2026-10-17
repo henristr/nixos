@@ -15,6 +15,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    grub-themes.url = "github:jeslie0/nixos-grub-themes";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:

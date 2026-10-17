@@ -13,7 +13,16 @@ in
       inputs.home-manager.nixosModules.default
     ];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+
+    gfxmodeEfi = "1920x1080";
+
+    theme = inputs.grub-themes.packages.${pkgs.system}.big-sur;
+  };
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.networkmanager.enable = true;
@@ -48,11 +57,17 @@ in
 
   services.libinput.enable = true;
 
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both";
+  };
+
   users.users.henri = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-    ];
+    description = "Henri";
+    extraGroups = [ "wheel" "networkmanager" ];
+    # packages = with pkgs; [
+    # ];
   };
 
   home-manager = {
