@@ -1,0 +1,78 @@
+{ config, lib, pkgs, inputs, ... }:
+
+let
+  unstable = import inputs.nixpkgs-unstable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
+in
+
+{
+  imports =
+    [
+      inputs.home-manager.nixosModules.default
+    ];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.networkmanager.enable = true;
+
+  time.timeZone = "Europe/Berlin";
+
+  i18n.defaultLocale = "de_DE.UTF-8";
+
+  services.xserver.enable = true;
+
+
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  
+  services.xserver.xkb = {
+    layout = "de";
+    variant = "nodeadkeys";
+  };
+  
+  console.keyMap = "de-latin1-nodeadkeys";
+
+  services.printing.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
+
+  services.libinput.enable = true;
+
+  users.users.henri = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    packages = with pkgs; [
+    ];
+  };
+
+  home-manager = {
+    extraSpecialArgs = {inherit inputs;};
+    users = {
+      "henri" = import ./home.nix;
+    };
+  };
+
+  programs.firefox.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    fastfetch
+    unstable.fetch
+    git
+    vim
+    wget
+  ];
+
+  services.openssh.enable = true;
+
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  system.stateVersion = "26.05";
+
+}
+
