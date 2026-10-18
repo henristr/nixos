@@ -15,31 +15,33 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-
-    grub-themes.url = "github:jeslie0/nixos-grub-themes";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
-  let
-    hosts = [ "vm" ];
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    hosts = ["vm"];
 
-    mkHost = hostname: nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/${hostname}/hardware-configuration.nix
-        ./common/configuration.nix
-        inputs.home-manager.nixosModules.default
-        {
-          networking.hostName = hostname;
+    mkHost = hostname:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/${hostname}/hardware-configuration.nix
+          ./common/configuration.nix
+          inputs.home-manager.nixosModules.default
+          {
+            networking.hostName = hostname;
 
-          home-manager.extraSpecialArgs = { inherit hostname; };
+            home-manager.extraSpecialArgs = {inherit hostname;};
 
-          home-manager.sharedModules = [
-            inputs.plasma-manager.homeModules.plasma-manager
-          ];
-        }
-      ];
-    };
+            home-manager.sharedModules = [
+              inputs.plasma-manager.homeModules.plasma-manager
+            ];
+          }
+        ];
+      };
   in {
     nixosConfigurations = nixpkgs.lib.genAttrs hosts mkHost;
   };

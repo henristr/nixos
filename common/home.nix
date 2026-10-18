@@ -1,20 +1,23 @@
-{ config, pkgs, hostname, ... }:
-
-let
+{
+  config,
+  pkgs,
+  hostname,
+  ...
+}: let
   hostModules = {
     vm = [];
-    smtpad = [ ../modules/gaming.nix ];
+    smtpad = [../modules/gaming.nix];
   };
 
   wallpaper = pkgs.fetchurl {
     url = "https://w.wallhaven.cc/full/qz/wallhaven-qzyyxd.png";
     hash = "sha256-rmOjRVh14gYzdAJnp9pNYMrWDkfm7P/70JY3/8U4ndU=";
   };
-in
-
-{
-  imports = [
-  ] ++ (hostModules.${hostname} or []);
+in {
+  imports =
+    [
+    ]
+    ++ (hostModules.${hostname} or []);
 
   home.username = "henri";
   home.homeDirectory = "/home/henri";
@@ -51,9 +54,9 @@ in
     };
   };
 
-
   programs.plasma = {
     enable = true;
+    overrideConfig = true;
     workspace = {
       lookAndFeel = "org.kde.breezedark.desktop";
       colorScheme = "BreezeDark";

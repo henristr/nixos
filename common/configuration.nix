@@ -1,17 +1,18 @@
-{ config, lib, pkgs, inputs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: let
   unstable = import inputs.nixpkgs-unstable {
     system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
-in
-
-{
-  imports =
-    [
-      inputs.home-manager.nixosModules.default
-    ];
+in {
+  imports = [
+    inputs.home-manager.nixosModules.default
+  ];
 
   boot.loader.grub = {
     enable = true;
@@ -19,8 +20,6 @@ in
     device = "nodev";
 
     gfxmodeEfi = "1920x1080";
-
-    theme = inputs.grub-themes.packages.${pkgs.system}.big-sur;
   };
 
   boot.loader.efi.canTouchEfiVariables = true;
@@ -40,12 +39,12 @@ in
   };
 
   services.desktopManager.plasma6.enable = true;
-  
+
   services.xserver.xkb = {
     layout = "de";
     variant = "nodeadkeys";
   };
-  
+
   console.keyMap = "de-latin1-nodeadkeys";
 
   services.printing.enable = true;
@@ -65,7 +64,7 @@ in
   users.users.henri = {
     isNormalUser = true;
     description = "Henri";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = ["wheel" "networkmanager"];
     # packages = with pkgs; [
     # ];
   };
@@ -99,8 +98,5 @@ in
     options = "--delete-older-than 14d";
   };
 
-
   system.stateVersion = "26.05";
-
 }
-
