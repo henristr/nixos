@@ -6,7 +6,7 @@
 }: let
   hostModules = {
     vm = [];
-    smtpad = [../modules/gaming.nix];
+    smtpad = [../modules/gaming.nix ../modules/jetbrains.nix];
   };
 
   wallpaper = pkgs.fetchurl {
@@ -31,6 +31,8 @@ in {
     alejandra
     bitwarden-cli
     bitwarden-desktop
+    go
+    nodejs
     tree
     vscode
   ];
@@ -57,11 +59,20 @@ in {
   programs.plasma = {
     enable = true;
     overrideConfig = true;
+
     workspace = {
       lookAndFeel = "org.kde.breezedark.desktop";
       colorScheme = "BreezeDark";
       wallpaper = wallpaper;
     };
+
+    panels = [
+      {
+        location = "bottom";
+        height = 40;
+        floating = true;
+      }
+    ];
   };
 
   programs.home-manager.enable = true;
