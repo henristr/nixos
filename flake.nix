@@ -31,6 +31,9 @@
         inputs.home-manager.nixosModules.default
         {
           networking.hostName = hostname;
+
+          home-manager.extraSpecialArgs = { inherit hostname; };
+
           home-manager.sharedModules = [
             inputs.plasma-manager.homeModules.plasma-manager
           ];

@@ -1,6 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, hostname, ... }:
 
 let
+  hostModules = {
+    vm = [];
+    smtpad = [ ../modules/gaming.nix ];
+  };
+
   wallpaper = pkgs.fetchurl {
     url = "https://w.wallhaven.cc/full/qz/wallhaven-qzyyxd.png";
     hash = "sha256-rmOjRVh14gYzdAJnp9pNYMrWDkfm7P/70JY3/8U4ndU=";
@@ -8,6 +13,9 @@ let
 in
 
 {
+  imports = [
+  ] ++ (hostModules.${hostname} or []);
+
   home.username = "henri";
   home.homeDirectory = "/home/henri";
 
@@ -17,6 +25,7 @@ in
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
+    alejandra
     bitwarden-cli
     bitwarden-desktop
     tree
