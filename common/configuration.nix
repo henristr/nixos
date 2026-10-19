@@ -74,6 +74,8 @@ in {
     users = {
       "henri" = import ./home.nix;
     };
+
+    backupFileExtension = "backup";
   };
 
   programs.firefox.enable = true;
