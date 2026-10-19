@@ -27,7 +27,7 @@
     nixpkgs,
     ...
   } @ inputs: let
-    hosts = ["vm"];
+    hosts = ["vm" "smtpad"];
 
     mkHost = hostname:
       nixpkgs.lib.nixosSystem {

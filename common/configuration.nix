@@ -10,10 +10,6 @@
     config.allowUnfree = true;
   };
 in {
-  imports = [
-    inputs.home-manager.nixosModules.default
-  ];
-
   boot.loader.grub = {
     enable = true;
     efiSupport = true;

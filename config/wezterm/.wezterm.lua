@@ -28,7 +28,7 @@ config.window_padding = {
 
 config.scrollback_lines = 10000
 
-config.window_background_opacity = 0.78
+config.window_background_opacity = 1.0
 config.win32_system_backdrop = "Acrylic"
 
 config.enable_scroll_bar = false
@@ -73,8 +73,6 @@ local colors = {
 -- ============================================================
 -- WINDOW FRAME
 -- ============================================================
-
-config.window_background_opacity = 1.0
 
 config.window_frame = {
 	border_left_width = "0.25cell",
