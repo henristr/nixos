@@ -53,29 +53,30 @@ in {
 
   programs.firefox = {
     enable = true;
-
     profiles.henri = {
-      search.engines = {
-        "Nix Packages" = {
-          urls = [
-            {
-              template = "https://search.nixos.org/packages";
-              params = [
-                {
-                  name = "type";
-                  value = "packages";
-                }
-                {
-                  name = "query";
-                  value = "{searchTerms}";
-                }
-              ];
-            }
-          ];
-
-          definedAliases = ["nix"];
+      isDefault = true;
+      search = {
+        force = true;
+        engines = {
+          "Nix Packages" = {
+            urls = [
+              {
+                template = "https://search.nixos.org/packages";
+                params = [
+                  {
+                    name = "type";
+                    value = "packages";
+                  }
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            definedAliases = ["nix"];
+          };
         };
-        search.force = true;
       };
 
       extensions.packages = with inputs.firefox-addons.packages."x86_64-linux"; [
