@@ -5,10 +5,16 @@
   inputs,
   ...
 }: let
+  flakePath = "${homeDir}/nixos-dotfiles";
+
+  homeDir = config.home.homeDirectory;
+
   hostModules = {
     vm = [];
     smtpad = [../modules/gaming.nix ../modules/jetbrains.nix];
   };
+
+  username = config.home.username;
 
   wallpaper = pkgs.fetchurl {
     url = "https://w.wallhaven.cc/full/qz/wallhaven-qzyyxd.png";
@@ -34,6 +40,7 @@ in {
     bitwarden-desktop
     fzf
     go
+    nixd
     nodejs
     tree
     vscode
@@ -123,6 +130,45 @@ in {
       lookAndFeel = "org.kde.breezedark.desktop";
       colorScheme = "BreezeDark";
       wallpaper = wallpaper;
+    };
+  };
+
+  programs.vscode = {
+    enable = true;
+
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        jnoortheen.nix-ide
+      ];
+
+      userSettings = {
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nixd";
+
+        "nix.serverSettings" = {
+          "nixd" = {
+            "formatting" = {
+              "command" = ["alejandra"];
+            };
+
+            "options" = {
+              "nixos" = {
+                "expr" = "(builtins.getFlake \"${flakePath}\").nixosConfigurations.${hostname}.options";
+              };
+
+              "home-manager" = {
+                "expr" = "(builtins.getFlake \"${flakePath}\").homeConfigurations.\"${username}@${hostname}\".options";
+              };
+            };
+          };
+        };
+
+        "[nix]" = {
+          "editor.defaultFormatter" = "jnoortheen.nix-ide";
+          "editor.formatOnSave" = true;
+          "editor.tabSize" = 2;
+        };
+      };
     };
   };
 
