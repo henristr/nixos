@@ -62,10 +62,10 @@ in {
   programs.plasma = {
     enable = true;
 
-    workspace = {
-      lookAndFeel = "org.kde.breezedark.desktop";
-      colorScheme = "BreezeDark";
-      wallpaper = wallpaper;
+    hotkeys.commands."launch-wezterm" = {
+      name = "Launch WezTerm";
+      key = "Ctrl+Alt+Y";
+      command = "wezterm";
     };
 
     panels = [
@@ -75,6 +75,23 @@ in {
         floating = true;
       }
     ];
+
+    shortcuts = {
+      "org.kde.konsole.desktop"."_launch" = [];
+      "services/org.kde.konsole.desktop"."_launch" = [];
+      "kwin"."Launch Terminal" = [];
+    };
+
+    workspace = {
+      lookAndFeel = "org.kde.breezedark.desktop";
+      colorScheme = "BreezeDark";
+      wallpaper = wallpaper;
+    };
+  };
+
+  programs.wezterm = {
+    enable = true;
+    extraConfig = builtins.readFile ../config/wezterm/.wezterm.lua;
   };
 
   programs.zoxide = {
