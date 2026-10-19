@@ -84,9 +84,14 @@ in {
     fastfetch
     unstable.fetch
     git
+    nh
     vim
     wget
   ];
+
+  environment.sessionVariables = {
+    NH_FLAKE = "/home/henri/nixos-dotfiles";
+  };
 
   services.openssh.enable = true;
 

@@ -31,6 +31,7 @@ in {
     alejandra
     bitwarden-cli
     bitwarden-desktop
+    fzf
     go
     nodejs
     tree
@@ -44,9 +45,11 @@ in {
   programs.bash = {
     enable = true;
     shellAliases = {
-      nrs = "sudo nixos-rebuild switch --flake /home/henri/nixos-dotfiles#$(hostname)";
+      nrs = "nh os switch";
     };
   };
+
+  programs.fzf.enableBashIntegration = true;
 
   programs.git = {
     enable = true;
@@ -58,7 +61,6 @@ in {
 
   programs.plasma = {
     enable = true;
-    overrideConfig = true;
 
     workspace = {
       lookAndFeel = "org.kde.breezedark.desktop";
@@ -73,6 +75,11 @@ in {
         floating = true;
       }
     ];
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
   };
 
   programs.home-manager.enable = true;
