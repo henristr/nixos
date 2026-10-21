@@ -42,6 +42,7 @@ in {
     gcc
     go
     gopeed
+    lavat
     nerd-fonts.jetbrains-mono
     nixd
     nodejs
@@ -87,6 +88,13 @@ in {
             definedAliases = ["nix"];
           };
         };
+      };
+
+      settings = {
+        "sidebar.revamp" = true;
+        "sidebar.verticalTabs" = true;
+
+        "browser.tabs.drawInTitlebar" = true;
       };
 
       extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
