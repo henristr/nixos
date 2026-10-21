@@ -28,8 +28,9 @@ config.window_padding = {
 
 config.scrollback_lines = 10000
 
-config.window_background_opacity = 1.0
-config.win32_system_backdrop = "Acrylic"
+config.window_background_opacity = 0.85
+config.kde_window_background_blur = true
+config.text_background_opacity = 1.0
 
 config.enable_scroll_bar = false
 config.use_dead_keys = false

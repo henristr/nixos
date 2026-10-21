@@ -39,7 +39,10 @@ in {
     bitwarden-cli
     bitwarden-desktop
     fzf
+    gcc
     go
+    gopeed
+    nerd-fonts.jetbrains-mono
     nixd
     nodejs
     tree
@@ -87,8 +90,21 @@ in {
       };
 
       extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
-        ublock-origin
         bitwarden
+        ublock-origin
+
+        (pkgs.stdenv.mkDerivation {
+          name = "gopeed-extension";
+          src = pkgs.fetchurl {
+            url = "https://mozilla.org";
+            hash = "sha256-qMTnSHR88zowrEVpGnWGdRlo9C+jKkVeE2bVwUFHFIg=";
+          };
+          buildCommand = ''
+            dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+            mkdir -p "$dst"
+            cp $src "$dst/{c5d69a8f-2ed0-46a7-afa4-b3a00dc58088}.xpi"
+          '';
+        })
       ];
     };
   };
@@ -101,6 +117,16 @@ in {
       name = "henristr";
       email = "strickerhenri@gmail.com";
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
+  xdg.configFile."nvim" = {
+    source = ../config/nvim;
+    recursive = true;
   };
 
   programs.plasma = {
@@ -131,6 +157,13 @@ in {
       colorScheme = "BreezeDark";
       wallpaper = wallpaper;
     };
+  };
+
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = true;
+
+    settings = pkgs.lib.importTOML ../config/starship/starship.toml;
   };
 
   programs.vscode = {
