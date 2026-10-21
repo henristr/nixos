@@ -38,6 +38,11 @@ in {
     alejandra
     bitwarden-cli
     bitwarden-desktop
+    btop
+    cava
+    cmatrix
+    cowsay
+    figlet
     fzf
     gcc
     go
@@ -47,6 +52,7 @@ in {
     nixd
     nodejs
     tree
+    viu
     vscode
   ];
 
@@ -57,8 +63,9 @@ in {
   programs.bash = {
     enable = true;
     shellAliases = {
-      nrs = "nh os switch";
       lo = "qdbus org.kde.Shutdown /Shutdown logout";
+      nrs = "nh os switch";
+      smt = "curl -sL https://lehrerfolg.de/host-stefan-schmit.png | viu -";
     };
   };
 
