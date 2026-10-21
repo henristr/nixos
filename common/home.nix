@@ -47,6 +47,7 @@ in {
     gcc
     go
     gopeed
+    kdePackages.krohnkite
     lavat
     nerd-fonts.jetbrains-mono
     nixd
@@ -165,12 +166,30 @@ in {
       "org.kde.konsole.desktop"."_launch" = [];
       "services/org.kde.konsole.desktop"."_launch" = [];
       "kwin"."Launch Terminal" = [];
+
+      kwin = {
+        "Window Close" = "Meta+Shift+Q";
+        "Walk Through Windows" = "Meta+Tab";
+        "Overview" = "Meta+D";
+
+        "Krohnkite: Focus Next Window" = "Meta+J";
+        "Krohnkite: Focus Previous Window" = "Meta+K";
+        "Krohnkite: Swap Next Window" = "Meta+Shift+J";
+        "Krohnkite: Swap Previous Window" = "Meta+Shift+K";
+        "Krohnkite: Set master" = "Meta+Return";
+        "Krohnkite: Next Layout" = "Meta+Space";
+        "Krohnkite: Toggle Floating" = "Meta+Shift+F";
+      };
     };
 
     workspace = {
       lookAndFeel = "org.kde.breezedark.desktop";
       colorScheme = "BreezeDark";
       wallpaper = wallpaper;
+    };
+
+    configFile."kwinrc" = {
+      "Plugins"."krohnkiteEnabled" = true;
     };
   };
 
