@@ -1,15 +1,30 @@
 {
   config,
   lib,
+  hostname,
   pkgs,
   inputs,
   ...
 }: let
+  systemModules = {
+    smtpad = [
+      ../modules/gamingSystem.nix
+      ../modules/gpu-intel.nix
+    ];
+
+    vm = [];
+  };
+
   unstable = import inputs.nixpkgs-unstable {
     system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
 in {
+  imports =
+    [
+    ]
+    ++ (systemModules.${hostname} or []);
+
   boot.loader.grub = {
     enable = true;
     efiSupport = true;

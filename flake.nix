@@ -31,7 +31,10 @@
 
     mkHost = hostname:
       nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
+        specialArgs = {
+          inherit inputs;
+          hostname = hostname;
+        };
         modules = [
           ./hosts/${hostname}/hardware-configuration.nix
           ./common/configuration.nix

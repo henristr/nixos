@@ -36,6 +36,7 @@ in {
 
   home.packages = with pkgs; [
     alejandra
+    benhsm-minesweeper
     bitwarden-cli
     bitwarden-desktop
     btop
@@ -72,6 +73,16 @@ in {
 
   programs.firefox = {
     enable = true;
+
+    policies = {
+      ExtensionSettings = {
+        "{c5d69a8f-2ed0-46a7-afa4-b3a00dc58088}" = {
+          install_url = "https://mozilla.org"; # Note: Extension store URLs usually point to addons.mozilla.org
+          installation_mode = "force_installed";
+        };
+      };
+    };
+
     profiles.henri = {
       isDefault = true;
       search = {
@@ -108,19 +119,6 @@ in {
       extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
         bitwarden
         ublock-origin
-
-        (pkgs.stdenv.mkDerivation {
-          name = "gopeed-extension";
-          src = pkgs.fetchurl {
-            url = "https://mozilla.org";
-            hash = "sha256-qMTnSHR88zowrEVpGnWGdRlo9C+jKkVeE2bVwUFHFIg=";
-          };
-          buildCommand = ''
-            dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-            mkdir -p "$dst"
-            cp $src "$dst/{c5d69a8f-2ed0-46a7-afa4-b3a00dc58088}.xpi"
-          '';
-        })
       ];
     };
   };
@@ -172,13 +170,15 @@ in {
         "Walk Through Windows" = "Meta+Tab";
         "Overview" = "Meta+D";
 
-        "Krohnkite: Focus Next Window" = "Meta+J";
-        "Krohnkite: Focus Previous Window" = "Meta+K";
-        "Krohnkite: Swap Next Window" = "Meta+Shift+J";
-        "Krohnkite: Swap Previous Window" = "Meta+Shift+K";
-        "Krohnkite: Set master" = "Meta+Return";
-        "Krohnkite: Next Layout" = "Meta+Space";
-        "Krohnkite: Toggle Floating" = "Meta+Shift+F";
+        "KrohnkiteFocusNext" = "Meta+J";
+        "KrohnkiteFocusPrevious" = "Meta+K";
+        "KrohnkiteShiftNext" = "Meta+Shift+J";
+        "KrohnkiteShiftPrevious" = "Meta+Shift+K";
+        "KrohnkiteSetMaster" = "Meta+Return";
+        "KrohnkiteNextLayout" = "Meta+Space";
+        "KrohnkiteToggleFloat" = "Meta+Shift+F";
+
+        "Window Fullscreen" = "Meta+Shift+Return";
       };
     };
 
