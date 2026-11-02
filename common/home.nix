@@ -10,16 +10,18 @@
   homeDir = config.home.homeDirectory;
 
   hostModules = {
-    vm = [];
-    smtpad = [../modules/gaming.nix ../modules/jetbrains.nix];
+    smtpad = [
+      ../modules/gamingSystem.nix
+      ../modules/gpu-intel.nix
+      ../modules/wallpapers.nix
+    ];
+
+    vm = [
+      ../modules/wallpapers.nix
+    ];
   };
 
   username = config.home.username;
-
-  wallpaper = pkgs.fetchurl {
-    url = "https://w.wallhaven.cc/full/qz/wallhaven-qzyyxd.png";
-    hash = "sha256-rmOjRVh14gYzdAJnp9pNYMrWDkfm7P/70JY3/8U4ndU=";
-  };
 in {
   imports =
     [
@@ -77,7 +79,7 @@ in {
     policies = {
       ExtensionSettings = {
         "{c5d69a8f-2ed0-46a7-afa4-b3a00dc58088}" = {
-          install_url = "https://mozilla.org"; # Note: Extension store URLs usually point to addons.mozilla.org
+          install_url = "https://mozilla.org";
           installation_mode = "force_installed";
         };
       };
@@ -185,7 +187,6 @@ in {
     workspace = {
       lookAndFeel = "org.kde.breezedark.desktop";
       colorScheme = "BreezeDark";
-      wallpaper = wallpaper;
     };
 
     configFile."kwinrc" = {

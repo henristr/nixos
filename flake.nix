@@ -15,6 +15,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    horizon-launcher = {
+      url = "github:Granddave/horizon-launcher.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    minegrub-world-sel-theme = {
+      url = "github:Lxtharia/minegrub-world-sel-theme";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,6 +49,7 @@
           ./hosts/${hostname}/hardware-configuration.nix
           ./common/configuration.nix
           inputs.home-manager.nixosModules.default
+          inputs.minegrub-world-sel-theme.nixosModules.default
           {
             networking.hostName = hostname;
 

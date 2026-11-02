@@ -42,6 +42,46 @@
         "type": "github"
       }
     },
+    "horizon-launcher": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793471671,
+        "narHash": "sha256-vz54z+zu0BNKPGvD8WmN/gEHYHTQGERbQgynyTdqEKc=",
+        "owner": "Granddave",
+        "repo": "horizon-launcher.nix",
+        "rev": "6beb150e009713450b5a3d6ab0d92539995af7da",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Granddave",
+        "repo": "horizon-launcher.nix",
+        "type": "github"
+      }
+    },
+    "minegrub-world-sel-theme": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792441379,
+        "narHash": "sha256-jOtdUki3Qjq7drbRTfxUqxDXIAk6uQGxRJLUVM5Ubv8=",
+        "owner": "Lxtharia",
+        "repo": "minegrub-world-sel-theme",
+        "rev": "55045f30796b3e993b40e7ab7e014c2e8512d436",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Lxtharia",
+        "repo": "minegrub-world-sel-theme",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1792030654,
@@ -101,6 +141,8 @@
       "inputs": {
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
+        "horizon-launcher": "horizon-launcher",
+        "minegrub-world-sel-theme": "minegrub-world-sel-theme",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "plasma-manager": "plasma-manager"
