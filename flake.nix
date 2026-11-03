@@ -30,6 +30,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    obsidian-extensions.url = "github:karaolidis/nix-obsidian-extensions";
   };
 
   outputs = {
@@ -51,6 +53,10 @@
           inputs.home-manager.nixosModules.default
           inputs.minegrub-world-sel-theme.nixosModules.default
           {
+            nixpkgs.overlays = [
+              inputs.obsidian-extensions.overlays.default
+            ];
+
             networking.hostName = hostname;
 
             home-manager.extraSpecialArgs = {inherit hostname;};

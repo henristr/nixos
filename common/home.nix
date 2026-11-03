@@ -45,6 +45,7 @@ in {
     cava
     cmatrix
     cowsay
+    fd
     figlet
     fzf
     gcc
@@ -52,12 +53,19 @@ in {
     gopeed
     kdePackages.krohnkite
     lavat
+    lua-language-server
     nerd-fonts.jetbrains-mono
     nixd
     nodejs
+    ripgrep
+    stylua
     tree
     viu
     vscode
+  ];
+
+  nixpkgs.overlays = [
+    inputs.obsidian-extensions.overlays.default
   ];
 
   home.sessionVariables = {
@@ -143,6 +151,23 @@ in {
   xdg.configFile."nvim" = {
     source = ../config/nvim;
     recursive = true;
+  };
+
+  programs.obsidian = {
+    enable = true;
+
+    vaults = {
+      Henri = {
+        target = "Obsidian/Henri";
+
+        settings = {
+          communityPlugins = with pkgs.obsidianPlugins; [
+            remotely-save
+            waypoint
+          ];
+        };
+      };
+    };
   };
 
   programs.plasma = {
