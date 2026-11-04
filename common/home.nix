@@ -11,9 +11,9 @@
 
   hostModules = {
     smtpad = [
-      ../modules/gamingSystem.nix
-      ../modules/gpu-intel.nix
+      ../modules/gaming.nix
       ../modules/wallpapers.nix
+      ../modules/horizon.nix
     ];
 
     vm = [
