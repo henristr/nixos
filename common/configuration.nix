@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   hostname,
   pkgs,
   inputs,
@@ -10,9 +8,12 @@
     smtpad = [
       ../modules/gamingSystem.nix
       ../modules/gpu-intel.nix
+      ../modules/thinkpad-yoga-system.nix
     ];
 
-    vm = [];
+    vm = [
+      ../modules/grub-a350-wallpaper.nix
+    ];
   };
 
   unstable = import inputs.nixpkgs-unstable {
@@ -29,19 +30,6 @@ in {
     enable = true;
     device = "nodev";
     efiSupport = true;
-
-    minegrub-world-sel = {
-      enable = true;
-      background = "assets/background-scaled/background-2560x1440.png";
-      customIcons = with config.system.nixos; [
-        {
-          name = distroId;
-          lineTop = distroName + " " + codeName + " (" + version + ")";
-          lineBottom = "Survival Mode, No Cheats, Version: " + release;
-          imgName = "nixos";
-        }
-      ];
-    };
   };
 
   boot.loader.efi.canTouchEfiVariables = true;

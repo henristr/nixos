@@ -14,6 +14,7 @@
       ../modules/gaming.nix
       ../modules/wallpapers.nix
       ../modules/horizon.nix
+      ../modules/thinkpad-yoga.nix
     ];
 
     vm = [
