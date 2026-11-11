@@ -9,6 +9,7 @@
       ../modules/gamingSystem.nix
       ../modules/gpu-intel.nix
       ../modules/thinkpad-yoga-system.nix
+      ../modules/grub-a350-wallpaper.nix
     ];
 
     vm = [
@@ -96,6 +97,7 @@ in {
     fastfetch
     unstable.fetch
     git
+    kdePackages.plasma-browser-integration
     nh
     vim
     wget
